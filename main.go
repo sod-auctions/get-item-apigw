@@ -28,10 +28,14 @@ func init() {
 }
 
 type Item struct {
-	Id       int32  `json:"id"`
-	Name     string `json:"name"`
-	MediaURL string `json:"mediaUrl"`
-	Quality  string `json:"quality"`
+	Id            int32  `json:"id"`
+	Name          string `json:"name"`
+	MediaURL      string `json:"mediaUrl"`
+	Quality       string `json:"quality"`
+	Level         int16  `json:"level"`
+	RequiredLevel int16  `json:"requiredLevel"`
+	PurchasePrice int32  `json:"purchasePrice"`
+	SellPrice     int32  `json:"sellPrice"`
 }
 
 func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -57,10 +61,14 @@ func handler(ctx context.Context, event events.APIGatewayProxyRequest) (events.A
 	}
 
 	mItem := &Item{
-		Id:       item.Id,
-		Name:     item.Name,
-		MediaURL: item.MediaURL,
-		Quality:  item.Rarity,
+		Id:            item.Id,
+		Name:          item.Name,
+		MediaURL:      item.MediaURL,
+		Quality:       item.Rarity,
+		Level:         item.Level,
+		RequiredLevel: item.RequiredLevel,
+		PurchasePrice: item.PurchasePrice,
+		SellPrice:     item.SellPrice,
 	}
 
 	body, _ := json.Marshal(mItem)
